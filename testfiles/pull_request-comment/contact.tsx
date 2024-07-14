@@ -20,7 +20,7 @@ import { SessionData, requireSessionData } from '~/utils/session.server';
 import { validateForm } from '~/utils/validation';
 
 export const meta: MetaFunction = () => {
-    return [{ title: 'Contact' },       { name: 'description', content: 'Admin Page' }];
+    return [{ title: 'Contact' }, { name: 'description', content: 'Admin Page' }];
 };
 
 const createIssueSchema = z.object({
@@ -39,14 +39,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
     const session = await requireSessionData(request);
 
-
-
-
-
-
-
-
-
     const form = await request.formData();
 
     return validateForm(
@@ -58,13 +50,17 @@ export async function action({ request }: ActionFunctionArgs) {
                 await sendDiscordWebhook({
                     embeds: [
                         {
-                            author: { name: session.login, url: `https://profile.intra.42.fr/users/${session.login}`, icon_url: session.imageUrl,
+                            author: {
+                                name: session.login,
+                                url: `https://profile.intra.42.fr/users/${session.login}`,
+                                icon_url: session.imageUrl,
                             },
                             color: 0xffe135,
                             description: data.message,
                             fields: [
                                 {
-                                    name: 'Contact Way', value: `${data.contactWay === 'discord' ? 'Discord' : data.contactWay === 'email' ? `Email: ${data.contactDetail}` : 'No need to contact the student.'}`,
+                                    name: 'Contact Way',
+                                    value: `${data.contactWay === 'discord' ? 'Discord' : data.contactWay === 'email' ? `Email: ${data.contactDetail}` : 'No need to contact the student.'}`,
                                 },
                             ],
                             title: 'New Contact Request',
@@ -73,8 +69,7 @@ export async function action({ request }: ActionFunctionArgs) {
                     username: 'Webportal',
                     wait: true,
                 });
-            } catch (error)
-            {
+            } catch (error) {
                 console.error(error);
 
                 return json(
@@ -93,7 +88,7 @@ export async function action({ request }: ActionFunctionArgs) {
     );
 }
 
-export default function Contact(){
+export default function Contact() {
     const data = useLoaderData<SessionData>();
 
     const contactFetcher = useFetcher<{
