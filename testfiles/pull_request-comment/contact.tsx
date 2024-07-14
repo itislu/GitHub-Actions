@@ -91,10 +91,6 @@ export async function action({ request }: ActionFunctionArgs) {
 export default function Contact() {
     const data = useLoaderData<SessionData>();
 
-
-
-
-    
     const contactFetcher = useFetcher<{
         errors?: { contactWay?: string; contactDetail?: string; message?: string; discordError?: string };
         success?: boolean;
