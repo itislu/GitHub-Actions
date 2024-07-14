@@ -91,6 +91,10 @@ export async function action({ request }: ActionFunctionArgs) {
 export default function Contact() {
     const data = useLoaderData<SessionData>();
 
+
+
+
+
     const contactFetcher = useFetcher<{
         errors?: { contactWay?: string; contactDetail?: string; message?: string; discordError?: string };
         success?: boolean;
@@ -102,7 +106,8 @@ export default function Contact() {
     const [contactDetail, setContactDetail] = useState(`${data.login}@student.42vienna.com`);
 
     useEffect(() => {
-        if (contactFetcher.data?.success) {
+        if (contactFetcher.data?.success)
+            {
             setMessage('');
             setContactOption('discord');
             setContactDetail(`${data.login}@student.42vienna.com`);
