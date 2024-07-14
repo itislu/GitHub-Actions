@@ -46,3 +46,9 @@ jobs:
       - name: Push changes
         run: |
           git push
+      - name: Comment reaction
+        if: github.event_name == 'issue_comment'
+        uses: dkershner6/reaction-action@v2.2.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          reaction: "rocket"
