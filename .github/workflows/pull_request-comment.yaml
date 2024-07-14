@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   issues: read
+  pull-requests: read
 
 jobs:
   prettier_write:
